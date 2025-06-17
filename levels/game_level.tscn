@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dh86wqt1xngcc"]
+
+[ext_resource type="PackedScene" uid="uid://cd156n3idapi5" path="res://objects/key_listener.tscn" id="1_qc6i3"]
+
+[node name="GameLevel" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+scale = Vector2(-0.481132, 3.2027)
+
+[node name="KeyListener" parent="." instance=ExtResource("1_qc6i3")]
+position = Vector2(-150, 247.5)
+scale = Vector2(0.4, 0.4)
+key_name = "Esquerda"
+
+[node name="KeyListener2" parent="." instance=ExtResource("1_qc6i3")]
+position = Vector2(-50, 247.5)
+scale = Vector2(0.4, 0.4)
+frame = 4
+key_name = "Baixo"
+
+[node name="KeyListener3" parent="." instance=ExtResource("1_qc6i3")]
+position = Vector2(50, 247.5)
+scale = Vector2(0.4, 0.4)
+frame = 2
+key_name = "Cima"
+
+[node name="KeyListener4" parent="." instance=ExtResource("1_qc6i3")]
+position = Vector2(150, 247.5)
+scale = Vector2(0.4, 0.4)
+frame = 5
+key_name = "Direita"

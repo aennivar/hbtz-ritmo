@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd156n3idapi5"]
+
+[ext_resource type="Texture2D" uid="uid://jgnbfji6ap08" path="res://assets/NOTE_assets.png" id="1_181ek"]
+[ext_resource type="Script" uid="uid://cdu16kamh3sat" path="res://objects/key_listener.gd" id="2_vgigu"]
+
+[node name="KeyListener" type="Sprite2D"]
+texture = ExtResource("1_181ek")
+hframes = 6
+vframes = 2
+frame = 3
+script = ExtResource("2_vgigu")
