@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dh86wqt1xngcc"]
+[gd_scene load_steps=3 format=3 uid="uid://dh86wqt1xngcc"]
 
 [ext_resource type="PackedScene" uid="uid://cd156n3idapi5" path="res://objects/key_listener.tscn" id="1_qc6i3"]
+[ext_resource type="PackedScene" uid="uid://diwpau5n50t71" path="res://levels/game_ui.tscn" id="2_sklrn"]
 
 [node name="GameLevel" type="Node2D"]
 
@@ -8,24 +9,22 @@
 scale = Vector2(-0.481132, 3.2027)
 
 [node name="KeyListener" parent="." instance=ExtResource("1_qc6i3")]
-position = Vector2(-150, 247.5)
-scale = Vector2(0.4, 0.4)
+position = Vector2(-150, 250)
 key_name = "Esquerda"
 
 [node name="KeyListener2" parent="." instance=ExtResource("1_qc6i3")]
-position = Vector2(-50, 247.5)
-scale = Vector2(0.4, 0.4)
-frame = 4
+position = Vector2(-50, 250)
+frame = 1
 key_name = "Baixo"
 
 [node name="KeyListener3" parent="." instance=ExtResource("1_qc6i3")]
-position = Vector2(50, 247.5)
-scale = Vector2(0.4, 0.4)
+position = Vector2(50, 250)
 frame = 2
 key_name = "Cima"
 
 [node name="KeyListener4" parent="." instance=ExtResource("1_qc6i3")]
-position = Vector2(150, 247.5)
-scale = Vector2(0.4, 0.4)
-frame = 5
+position = Vector2(150, 250)
+frame = 3
 key_name = "Direita"
+
+[node name="GameUI" parent="." instance=ExtResource("2_sklrn")]

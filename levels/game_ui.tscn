@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://diwpau5n50t71"]
+
+[ext_resource type="Script" uid="uid://beq410f5oh65s" path="res://levels/game_ui.gd" id="1_451jp"]
+
+[node name="GameUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_451jp")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="RichTextLabel" parent="CanvasLayer"]
+unique_name_in_owner = true
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 152.0
+offset_bottom = 64.0
+theme_override_font_sizes/normal_font_size = 25
+text = "0 pts"
