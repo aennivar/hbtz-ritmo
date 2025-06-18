@@ -2,6 +2,7 @@ extends Sprite2D
 
 @onready var falling_key = preload("res://objects/falling_key.tscn")
 @onready var score_text = preload("res://objects/score_press_text.tscn")
+@onready var pass_threshold = ""
 @export var key_name: String = ""
 
 var falling_key_queue = [] # Uma queue pra segurar as notas (falling keys) pra cada alvo (key listener)
