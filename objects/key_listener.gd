@@ -2,7 +2,6 @@ extends Sprite2D
 
 @onready var falling_key = preload("res://objects/falling_key.tscn")
 @onready var score_text = preload("res://objects/score_press_text.tscn")
-@onready var pass_threshold = ""
 @export var key_name: String = ""
 
 var falling_key_queue = [] # Uma queue pra segurar as notas (falling keys) pra cada alvo (key listener)
@@ -19,8 +18,15 @@ var great_press_score: float = 100
 var good_press_score: float = 50
 var ok_press_score: float = 20
 
+func _ready():
+	$GlowOverlay.frame = frame + 4
+	Signals.CreateFallingKey.connect(CreateFallingKey)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	
+	if Input.is_action_just_pressed(key_name):
+		Signals.KeyListenerPress.emit(key_name, frame)
 	
 	# Garanta que tenha uma falling key (nota) pra checar essa nota
 	if falling_key_queue.size() > 0:
@@ -34,6 +40,7 @@ func _process(delta):
 			get_tree().get_root().call_deferred("add_child", st_inst)
 			st_inst.SetTextInfo("MISS")
 			st_inst.global_position = global_position + Vector2(-80, -15)
+			Signals.ResetCombo.emit()
 			
 		# Se a nota foi pressionada, tira (pop) da queue e calcula a distância do ponto crítico
 		if Input.is_action_just_pressed(key_name):
@@ -41,22 +48,29 @@ func _process(delta):
 			
 			var distance_from_pass = abs(key_to_pop.pass_threshold - key_to_pop.global_position.y)
 			
+			$AnimationPlayer.stop() #Quando a tecla for pressionada, para o player (pra resetar) e aí toca a animação
+			$AnimationPlayer.play("key_hit")
+			
 			var press_score_text: String = ""
 			if distance_from_pass < perfect_press_threshold:
 				Signals.IncrementScore.emit(perfect_press_score); print("perfect")
 				press_score_text = "PERFECT"
+				Signals.IncrementCombo.emit()
 			elif distance_from_pass < great_press_threshold:
 				Signals.IncrementScore.emit(great_press_score); print("great")
 				press_score_text = "GREAT"
+				Signals.IncrementCombo.emit()
 			elif distance_from_pass < good_press_threshold:
 				Signals.IncrementScore.emit(good_press_score); print("good")
 				press_score_text = "GOOD"
+				Signals.IncrementCombo.emit()
 			elif distance_from_pass < ok_press_threshold:
 				Signals.IncrementScore.emit(ok_press_score); print("ok")
 				press_score_text = "OK"
+				Signals.IncrementCombo.emit()
 			else:
 				press_score_text = "MISS"
-				pass
+				Signals.ResetCombo.emit()
 			
 			key_to_pop.queue_free()
 	
@@ -68,15 +82,16 @@ func _process(delta):
 			
 	
 
-func CreateFallingKey(): # Instanciar a cena FallingKey do script key_listener.gd e diz ao KL onde a nota começa
-	var fk_inst = falling_key.instantiate()
-	get_tree().get_root().call_deferred("add_child", fk_inst)
-	fk_inst.Setup(position.x, frame + 4) # "frame + 4" porque têm 4 textures em cada linha e a FK desejada tá na próxima linha
-	
-	falling_key_queue.push_back(fk_inst)
+func CreateFallingKey(button_name: String): # Instanciar a cena FallingKey do script key_listener.gd e diz ao KL onde a nota começa
+	if button_name == key_name:
+		var fk_inst = falling_key.instantiate()
+		get_tree().get_root().call_deferred("add_child", fk_inst)
+		fk_inst.Setup(position.x, frame + 4) # "frame + 4" porque têm 4 textures em cada linha e a FK desejada tá na próxima linha
+		
+		falling_key_queue.push_back(fk_inst)
 
 
 func _on_random_spawn_timer_timeout():
-	CreateFallingKey()
+	# CreateFallingKey()
 	$RandomSpawnTimer.wait_time = randf_range(0.4, 3)
 	$RandomSpawnTimer.start()
