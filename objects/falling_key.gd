@@ -2,7 +2,7 @@ extends Sprite2D
 
 @export var fall_speed: float = 3.0
 
-var init_y_pos: float = -362.0
+var init_y_pos: float = -400.0
 
 # true se falling key passar o imput frame permitido
 var has_passed: bool = false

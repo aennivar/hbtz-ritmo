@@ -24,7 +24,7 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("2_tpbhn")
 theme_override_font_sizes/normal_font_size = 25
 text = " 0
- pts"
+  pts"
 
 [node name="ComboLabel" type="RichTextLabel" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -36,4 +36,4 @@ theme_override_constants/outline_size = 10
 theme_override_fonts/normal_font = ExtResource("2_tpbhn")
 theme_override_font_sizes/normal_font_size = 25
 text = " 0x
- combo"
+  combo"
